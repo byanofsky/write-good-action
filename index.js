@@ -8,7 +8,6 @@ const fs = require("fs");
  */
 async function run() {
   try {
-    core.info("Starting Write-Good action.");
     let error = false;
 
     // TODO: Allow input to override glob pattern.
@@ -18,8 +17,7 @@ async function run() {
       const data = fs.readFileSync(file, "utf-8");
       const suggestions = writeGood(data);
       if (suggestions.length > 0) {
-        core.error(`File: ${file}`);
-        core.error(JSON.stringify(suggestions));
+        core.error(JSON.stringify({ file, ...suggestions }));
         error = true;
       }
     }
