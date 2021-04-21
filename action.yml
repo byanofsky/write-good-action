@@ -1,0 +1,5 @@
+name: "Write Good"
+description: "Find errors and suggestions for prose."
+runs:
+  using: "node12"
+  main: "index.js"
