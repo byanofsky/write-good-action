@@ -4534,6 +4534,7 @@ var __webpack_exports__ = {};
 const glob = __nccwpck_require__(687);
 const writeGood = __nccwpck_require__(282);
 const core = __nccwpck_require__(193);
+const fs = __nccwpck_require__(747);
 
 /**
  * TODO: Add JSDoc
@@ -4547,14 +4548,12 @@ async function run() {
     const globber = await glob.create("**/*.md");
 
     for await (const file of globber.globGenerator()) {
-      core.info(`Checking ${file}.`);
-      const suggestions = writeGood(file);
+      const data = fs.readFileSync(file, "utf-8");
+      const suggestions = writeGood(data);
       if (suggestions.length > 0) {
         core.error(`File: ${file}`);
         core.error(JSON.stringify(suggestions));
         error = true;
-      } else {
-        core.info(`No issues with ${file}.`);
       }
     }
 
