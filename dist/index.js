@@ -4547,11 +4547,14 @@ async function run() {
     const globber = await glob.create("**/*.md");
 
     for await (const file of globber.globGenerator()) {
+      core.info(`Checking ${file}.`);
       const suggestions = writeGood(file);
       if (suggestions.length > 0) {
         core.error(`File: ${file}`);
         core.error(JSON.stringify(suggestions));
         error = true;
+      } else {
+        core.info(`No issues with ${file}.`);
       }
     }
 
