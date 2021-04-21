@@ -17,7 +17,7 @@ async function run() {
       const data = fs.readFileSync(file, "utf-8");
       const suggestions = writeGood(data);
       if (suggestions.length > 0) {
-        core.error(JSON.stringify({ file, ...suggestions }));
+        core.error(JSON.stringify({ file, suggestions }));
         error = true;
       }
     }
